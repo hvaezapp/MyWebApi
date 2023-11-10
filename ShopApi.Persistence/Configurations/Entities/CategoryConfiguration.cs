@@ -8,7 +8,18 @@ namespace ShopApi.Persistence.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-
+            builder.HasData(
+                new Category
+                {
+                    Id = 1,
+                    Name = "Mobile",
+                },
+                 new Category
+                 { 
+                     Id = 2 , 
+                     Name = "Vehicle",
+                 }
+             );
         }
     }
 }
