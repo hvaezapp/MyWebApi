@@ -7,6 +7,7 @@ namespace ShopApi.Application.Features.Product.Requests.Queries
     public class GetProductListRequest : IRequest<List<ProductDto>>
     {
         public int PageNom { get; set; }
-        public FilterBy FilterBy { get; set; }
+        //public FilterBy FilterBy { get; set; }
+        public string FilterByName { get; set; }
     }
 }

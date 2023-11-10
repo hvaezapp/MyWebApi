@@ -4,6 +4,7 @@ using ShopApi.Application.Contracts.Persistence;
 using ShopApi.Application.DTOs.Category;
 using ShopApi.Application.DTOs.Product;
 using ShopApi.Application.Features.Category.Requests.Queries;
+using ShopApi.Infrastructure.AppUtility;
 
 namespace ShopApi.Application.Features.Category.Handlers.Queries
 {
@@ -29,7 +30,9 @@ namespace ShopApi.Application.Features.Category.Handlers.Queries
 
         public async Task<List<CategoryDto>> Handle(GetCategoryListRequest request, CancellationToken cancellationToken)
         {
-            var categories = await _categoryRepository.GetCategories(request.FilterBy , request.PageNom);
+            int skip = (request.PageNom * 10) - 1;
+
+            var categories = await _categoryRepository.GetCategories(request.FilterByName  , skip ,  DefaultConst.TakeCount );
             return _mapper.Map<List<CategoryDto>>(categories);
         }
     }

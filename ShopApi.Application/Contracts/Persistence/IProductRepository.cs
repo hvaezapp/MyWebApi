@@ -5,7 +5,8 @@ namespace ShopApi.Application.Contracts.Persistence
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
-        Task<List<Category>> GetProducts(FilterBy filterBy = null , int pageNom = 1);
-
+        Task<List<Product>> GetProducts(string filterByName = "", int skip = 0, int take = 10);
+        //Task<List<Product>> GetProducts(FilterBy filterBy = null, int skip = 0, int take = 10);
+        
     }
 }

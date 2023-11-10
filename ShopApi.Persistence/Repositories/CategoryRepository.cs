@@ -1,6 +1,8 @@
-﻿using ShopApi.Application.Contracts.Persistence;
+﻿using Microsoft.EntityFrameworkCore;
+using ShopApi.Application.Contracts.Persistence;
 using ShopApi.Application.DTOs.Filter;
 using ShopApi.Domain.Entity;
+using System.Collections.Generic;
 
 namespace ShopApi.Persistence.Repositories
 {
@@ -17,9 +19,30 @@ namespace ShopApi.Persistence.Repositories
 
 
 
-        public Task<List<Category>> GetCategories(FilterBy filterBy = null, int pageNom = 1)
+        public async Task<List<Category>> GetCategories(string filterByName = "", int skip = 0, int take  = 10)
         {
-            throw new NotImplementedException();
-        }
+            //List<Category> categories =  new();
+
+
+            //if (filterBy != null)
+            //{
+            //    categories = await _dbContext.Category
+            //                            .Where(a => a.Name.Contains(filterByName))
+            //                            .Skip(skip).Take(take).ToListAsync();
+            //}
+            //else
+            //{
+            //    categories = await _dbContext.Category
+            //                       .Skip(skip).Take(take).ToListAsync();
+            //}
+
+
+            return            await _dbContext.Category
+                                    .Where(a => a.Name.Contains(filterByName))
+                                    .Skip(skip).Take(take).ToListAsync();
+
+         
+
+        }                                  
     }
 }

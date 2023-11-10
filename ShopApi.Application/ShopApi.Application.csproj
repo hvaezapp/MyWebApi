@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShopApi.Domain\ShopApi.Domain.csproj" />
+    <ProjectReference Include="..\ShopApi.Infrastructure\ShopApi.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

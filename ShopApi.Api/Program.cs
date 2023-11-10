@@ -85,7 +85,7 @@ void AddSwagger(IServiceCollection services)
         o.SwaggerDoc("v1", new OpenApiInfo()
         {
             Version = "v1",
-            Title = "HR Management Api"
+            Title = "Shop Api"
         });
     });
 }

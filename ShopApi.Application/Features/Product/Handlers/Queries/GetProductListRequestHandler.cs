@@ -3,6 +3,7 @@ using MediatR;
 using ShopApi.Application.Contracts.Persistence;
 using ShopApi.Application.DTOs.Product;
 using ShopApi.Application.Features.Product.Requests.Queries;
+using ShopApi.Infrastructure.AppUtility;
 
 namespace ShopApi.Application.Features.Product.Handlers.Queries
 {
@@ -28,7 +29,9 @@ namespace ShopApi.Application.Features.Product.Handlers.Queries
 
         public async Task<List<ProductDto>> Handle(GetProductListRequest request, CancellationToken cancellationToken)
         {
-            var products = await _productRepository.GetProducts(request.FilterBy , request.PageNom);
+            int skip = (request.PageNom * 10) - 1;
+
+            var products = await _productRepository.GetProducts(request.FilterByName , skip  , DefaultConst.TakeCount);
             return _mapper.Map<List<ProductDto>>(products);
         }
     }
