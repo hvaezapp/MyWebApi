@@ -10,7 +10,7 @@ namespace ShopApi.Domain.Common
 {
     public abstract class BaseDomainEntity
     {
-        [Key]
+        //[Key]
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }
         public string? CreatedBy { get; set; }
