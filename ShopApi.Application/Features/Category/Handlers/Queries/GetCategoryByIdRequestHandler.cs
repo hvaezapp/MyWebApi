@@ -8,7 +8,7 @@ namespace ShopApi.Application.Features.Category.Handlers.Queries
 {
 
 
-    public class GetCategoryListRequestHandler : IRequestHandler<GetCategoryListRequest, List<CategoyDto>>
+    public class GetCategoryByIdRequestHandler : IRequestHandler<GetCategoryByIdRequest, CategoyDto>
     {
 
         private readonly ICategoryRepository _categoryRepository;
@@ -17,7 +17,7 @@ namespace ShopApi.Application.Features.Category.Handlers.Queries
 
 
 
-        public GetCategoryListRequestHandler(ICategoryRepository categoryRepository
+        public GetCategoryByIdRequestHandler(ICategoryRepository categoryRepository
             , IMapper mapper)
         {
             _categoryRepository = categoryRepository;
@@ -26,10 +26,10 @@ namespace ShopApi.Application.Features.Category.Handlers.Queries
 
 
 
-        public async Task<List<CategoyDto>> Handle(GetCategoryListRequest request, CancellationToken cancellationToken)
+        public async Task<CategoyDto> Handle(GetCategoryByIdRequest request, CancellationToken cancellationToken)
         {
-            var categories = await _categoryRepository.GetCategories(request.PageNom , request.FilterByName);
-            return _mapper.Map<List<CategoyDto>>(categories);
+            var category = await _categoryRepository.Get(request.Id);
+            return _mapper.Map<CategoyDto>(category);
         }
     }
 }
