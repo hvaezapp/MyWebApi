@@ -14,7 +14,7 @@ namespace ShopApi.Persistence
             services.AddDbContext<ShopApiDbContext>(options =>
             {
                 options.UseSqlServer(configuration
-                    .GetConnectionString(""));
+                    .GetConnectionString("ShopApiConnectionString"));
             });
 
 
