@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using ShopApi.Application.Contracts.Persistence;
+using ShopApi.Application.DTOs.Category;
 using ShopApi.Application.DTOs.Product;
 using ShopApi.Application.Features.Category.Requests.Queries;
 
@@ -8,7 +9,7 @@ namespace ShopApi.Application.Features.Category.Handlers.Queries
 {
 
 
-    public class GetCategoryListRequestHandler : IRequestHandler<GetCategoryListRequest, List<ProductDto>>
+    public class GetCategoryListRequestHandler : IRequestHandler<GetCategoryListRequest, List<CategoryDto>>
     {
 
         private readonly ICategoryRepository _categoryRepository;
@@ -26,10 +27,10 @@ namespace ShopApi.Application.Features.Category.Handlers.Queries
 
 
 
-        public async Task<List<ProductDto>> Handle(GetCategoryListRequest request, CancellationToken cancellationToken)
+        public async Task<List<CategoryDto>> Handle(GetCategoryListRequest request, CancellationToken cancellationToken)
         {
-            var categories = await _categoryRepository.GetCategories(request.PageNom, request.FilterByName);
-            return _mapper.Map<List<ProductDto>>(categories);
+            var categories = await _categoryRepository.GetCategories(request.FilterBy , request.PageNom);
+            return _mapper.Map<List<CategoryDto>>(categories);
         }
     }
 }

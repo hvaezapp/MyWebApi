@@ -1,9 +1,10 @@
-﻿using ShopApi.Domain.Entity;
+﻿using ShopApi.Application.DTOs.Filter;
+using ShopApi.Domain.Entity;
 
 namespace ShopApi.Application.Contracts.Persistence
 {
     public interface ICategoryRepository : IGenericRepository<Category>
     {
-        Task<List<Category>> GetCategories(int page = 1 , string filterbyname = "");
+        Task<List<Category>> GetCategories(FilterBy filterBy  = null , int pageNom = 1);
     }
 }

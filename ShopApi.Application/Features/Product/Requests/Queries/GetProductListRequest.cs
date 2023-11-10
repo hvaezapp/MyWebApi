@@ -1,15 +1,12 @@
 ﻿using MediatR;
-using ShopApi.Application.DTOs.Category;
 using ShopApi.Application.DTOs.Filter;
 using ShopApi.Application.DTOs.Product;
 
-namespace ShopApi.Application.Features.Category.Requests.Queries
+namespace ShopApi.Application.Features.Product.Requests.Queries
 {
-    public class GetCategoryListRequest : IRequest<List<CategoryDto>>
+    public class GetProductListRequest : IRequest<List<ProductDto>>
     {
-
         public int PageNom { get; set; }
         public FilterBy FilterBy { get; set; }
-
     }
 }

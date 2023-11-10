@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -17,13 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShopApi.Domain\ShopApi.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Product\Handlers\Commands\" />
-    <Folder Include="Features\Product\Handlers\Queries\" />
-    <Folder Include="Features\Product\Requests\Commands\" />
-    <Folder Include="Features\Product\Requests\Queries\" />
   </ItemGroup>
 
 </Project>
