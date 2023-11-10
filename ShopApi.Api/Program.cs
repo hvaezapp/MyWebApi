@@ -1,4 +1,4 @@
-
+using ShopApi.Identity;
 using ShopApi.Application;
 using ShopApi.Persistence;
 using Microsoft.OpenApi.Models;
@@ -13,8 +13,7 @@ builder.Services.AddControllers();
 
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigurePersistenceServices(builder.Configuration);
-//builder.Services.ConfigureInfrastractureServices(builder.Configuration);
-//builder.Services.ConfigureIdentityServices(builder.Configuration);
+builder.Services.ConfigureIdentityServices(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();

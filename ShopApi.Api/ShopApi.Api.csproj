@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ShopApi.Application\ShopApi.Application.csproj" />
     <ProjectReference Include="..\ShopApi.Domain\ShopApi.Domain.csproj" />
+    <ProjectReference Include="..\ShopApi.Identity\ShopApi.Identity.csproj" />
     <ProjectReference Include="..\ShopApi.Persistence\ShopApi.Persistence.csproj" />
   </ItemGroup>
 
