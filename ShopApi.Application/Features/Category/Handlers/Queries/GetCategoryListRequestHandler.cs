@@ -47,7 +47,8 @@ namespace ShopApi.Application.Features.Category.Handlers.Queries
 
             if (_cache.TryGetValue(categoryListCacheKey, out List<Domain.Entity.Category> cashedCategories))
             {
-                categories = cashedCategories.Skip(skip).Take(DefaultConst.TakeCount).ToList();
+                //categories = cashedCategories.Skip(skip).Take(DefaultConst.TakeCount).ToList();
+                categories = cashedCategories;
             }
             else
             {
@@ -65,7 +66,6 @@ namespace ShopApi.Application.Features.Category.Handlers.Queries
             }
 
 
-            //var products = await _productRepository.GetProducts(request.FilterByName , skip  , DefaultConst.TakeCount);
             return _mapper.Map<List<CategoryDto>>(categories);
         }
     }

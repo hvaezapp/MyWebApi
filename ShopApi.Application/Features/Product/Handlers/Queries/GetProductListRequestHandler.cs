@@ -43,7 +43,9 @@ namespace ShopApi.Application.Features.Product.Handlers.Queries
 
             if (_cache.TryGetValue(productListCacheKey, out List<Domain.Entity.Product> cashedProducts))
             {
-                products = cashedProducts.Skip(skip).Take(DefaultConst.TakeCount).ToList();
+                //products = cashedProducts.Skip(skip).Take(DefaultConst.TakeCount).ToList();
+
+                products = cashedProducts;
             }
             else
             {
