@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopApi_Domain
+namespace ShopApi.Domain.Entity
 {
-    public class Category: BaseDomainEntity
+    public class Category : BaseDomainEntity
     {
         public string Name { get; set; }
 
