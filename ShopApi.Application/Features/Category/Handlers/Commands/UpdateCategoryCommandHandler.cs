@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using HR_Management.Application.DTOs.LeaveType.Validators;
 using MediatR;
 using ShopApi.Application.Contracts.Persistence;
+using ShopApi.Application.DTOs.Category.Validators;
 using ShopApi.Application.Exceptions;
 using ShopApi.Application.Features.Category.Requests.Commands;
 
@@ -24,7 +24,7 @@ namespace ShopApi.Application.Features.Category.Handlers.Commands
         public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
 
-            var validator = new UpdateLeaveTypeValidator();
+            var validator = new UpdateCategoryValidator();
             var validationResult = await validator.ValidateAsync(request.UpdateCategoryDto);
 
             if (validationResult.IsValid == false)

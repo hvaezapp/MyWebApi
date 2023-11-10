@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopApi.Application.DTOs.Category
 {
-    public class CategoyDto : BaseDto
+    public class CategoryDto : BaseDto
     {
         public string Name { get; set; }
     }

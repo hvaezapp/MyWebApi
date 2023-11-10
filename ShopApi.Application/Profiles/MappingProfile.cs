@@ -10,9 +10,9 @@ namespace ShopApi.Application.Profiles
         {
             #region Category Mapping
 
-            CreateMap<Category, CategoyDto>().ReverseMap();
-            CreateMap<Category, CreateCategoryDto>().ReverseMap();
-            CreateMap<Category, UpdateCategoryDto>().ReverseMap();
+            CreateMap<Category, ProductDto>().ReverseMap();
+            CreateMap<Category, CreateProductDto>().ReverseMap();
+            CreateMap<Category, UpdateProductDto>().ReverseMap();
 
             #endregion
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShopApi.Application.Features.Category.Requests.Queries
 {
-    public class GetCategoryByIdRequest : IRequest<CategoyDto>
+    public class GetCategoryByIdRequest : IRequest<ProductDto>
     {
         public int Id { get; set; }
     }

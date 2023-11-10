@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using HR_Management.Application.DTOs.LeaveType.Validators;
 using MediatR;
 using ShopApi.Application.Contracts.Persistence;
 using ShopApi.Application.Features.Category.Requests.Commands;
 using ShopApi.Application.Responses;
-using ShopApi.Domain.Entity;
+using ShopApi.Application.DTOs.Category.Validators;
 
 
 namespace ShopApi.Application.Features.Category.Handlers.Commands

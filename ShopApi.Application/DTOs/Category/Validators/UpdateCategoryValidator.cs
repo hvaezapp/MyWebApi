@@ -1,11 +1,10 @@
 ﻿using FluentValidation;
-using ShopApi.Application.DTOs.Category;
 
-namespace HR_Management.Application.DTOs.LeaveType.Validators
+namespace ShopApi.Application.DTOs.Category.Validators
 {
-    public class UpdateLeaveTypeValidator : AbstractValidator<UpdateCategoryDto>
+    public class UpdateCategoryValidator : AbstractValidator<UpdateCategoryDto>
     {
-        public UpdateLeaveTypeValidator()
+        public UpdateCategoryValidator()
         {
 
             RuleFor(p => p.Id).NotNull()

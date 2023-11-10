@@ -11,6 +11,6 @@ namespace ShopApi.Application.Features.Category.Requests.Commands
 {
     public class CreateCategoryCommand : IRequest<BaseCommandResponse>
     {
-        public CreateCategoryDto CreateCategoryDto { get; set; }
+        public CreateProductDto CreateCategoryDto { get; set; }
     }
 }

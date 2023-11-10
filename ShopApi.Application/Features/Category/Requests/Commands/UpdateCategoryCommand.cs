@@ -11,6 +11,6 @@ namespace ShopApi.Application.Features.Category.Requests.Commands
 {
     public class UpdateCategoryCommand : IRequest<Unit>
     {
-        public UpdateCategoryDto UpdateCategoryDto { get; set; }
+        public UpdateProductDto UpdateCategoryDto { get; set; }
     }
 }

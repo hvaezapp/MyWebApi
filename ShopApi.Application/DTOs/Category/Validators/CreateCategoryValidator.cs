@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HR_Management.Application.DTOs.LeaveType.Validators
+namespace ShopApi.Application.DTOs.Category.Validators
 {
-    public class CreateCategoryValidator:AbstractValidator<CreateCategoryDto>
+    public class CreateCategoryValidator : AbstractValidator<CreateCategoryDto>
     {
         public CreateCategoryValidator()
         {
