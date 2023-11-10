@@ -1,10 +1,5 @@
 ﻿using MediatR;
-using ShopApi.Application.DTOs.Category;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ShopApi.Application.DTOs.Product;
 
 namespace ShopApi.Application.Features.Category.Requests.Queries
 {

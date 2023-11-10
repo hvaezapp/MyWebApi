@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using ShopApi.Application.Contracts.Persistence;
-using ShopApi.Application.DTOs.Category;
+using ShopApi.Application.DTOs.Product;
 using ShopApi.Application.Features.Category.Requests.Queries;
 
 namespace ShopApi.Application.Features.Category.Handlers.Queries
