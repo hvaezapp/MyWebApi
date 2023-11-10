@@ -17,7 +17,7 @@ namespace ShopApi.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -53,7 +53,7 @@ namespace ShopApi.Api.Controllers
 
         // POST api/<ProductController>
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "ADMINISTRATOR")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateProductDto productDto)
         {
             var command = new CreateProductCommand { CreateProductDto = productDto };
