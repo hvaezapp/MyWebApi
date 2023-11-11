@@ -10,6 +10,5 @@ namespace ShopApi.Infrastructure.AppUtility
     {
         public static int TakeCount = 10;
 
-       
     }
 }

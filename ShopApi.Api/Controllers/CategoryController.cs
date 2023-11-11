@@ -1,14 +1,10 @@
-﻿using ShopApi.Application.DTOs.Category;
-using ShopApi.Application.Features.Category.Requests.Queries;
-using ShopApi.Application.Features.Category.Requests.Commands;
-
-using ShopApi.Application.Responses;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ShopApi.Application.DTOs.Filter;
+using ShopApi.Application.DTOs.Category;
+using ShopApi.Application.Features.Category.Requests.Commands;
+using ShopApi.Application.Features.Category.Requests.Queries;
+using ShopApi.Application.Responses;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ShopApi.Api.Controllers
 {
@@ -28,10 +24,9 @@ namespace ShopApi.Api.Controllers
 
         // GET: api/<CategoryController>
         [HttpGet]
-     
-        public async Task<ActionResult<List<CategoryDto>>> Get(string filterByName = "" , int pageNom = 1)
+        public async Task<ActionResult<List<CategoryDto>>> GetAll(int pageNom = 1)
         {
-            var categories = await _mediator.Send(new GetCategoryListRequest() {  FilterByName = filterByName , PageNom = pageNom });
+            var categories = await _mediator.Send(new GetCategoryListRequest() { PageNom = pageNom });
             return Ok(categories);
         }
 
@@ -50,7 +45,7 @@ namespace ShopApi.Api.Controllers
 
         // POST api/<CategoryController>
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateCategoryDto categoryDto)
         {
             var command = new CreateCategoryCommand { CreateCategoryDto = categoryDto };
@@ -60,14 +55,14 @@ namespace ShopApi.Api.Controllers
 
 
 
-        // PUT api/<CategoryController>/2
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult> Put(int id, [FromBody] UpdateCategoryDto categoryDto)
+        // PUT api/<CategoryController>
+        [HttpPut]
+        //[Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<BaseCommandResponse>> Put([FromBody] UpdateCategoryDto categoryDto)
         {
-            var command = new UpdateCategoryCommand { UpdateCategoryDto  = categoryDto };
-            await _mediator.Send(command);
-            return NoContent();
+            var command = new UpdateCategoryCommand { UpdateCategoryDto = categoryDto };
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
 
 

@@ -12,6 +12,11 @@ namespace ShopApi.Application.DTOs.Product.Validators
 
 
 
+            RuleFor(p => p.CategoryId).NotNull()
+            .WithMessage("{PropertyName} is required.");
+
+
+
             RuleFor(p => p.Name).NotEmpty().WithMessage("{PropertyName} is required.")
              .NotNull()
              .MaximumLength(50).WithMessage("{PropertyName} must not exceed 50");

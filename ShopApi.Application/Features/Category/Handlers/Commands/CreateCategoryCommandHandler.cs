@@ -40,6 +40,7 @@ namespace ShopApi.Application.Features.Category.Handlers.Commands
 
                 var category = _mapper.Map<Domain.Entity.Category>(request.CreateCategoryDto);
                 category = await _categoryRepository.Add(category);
+                await _categoryRepository.SaveChanges();
 
                 response.Success = true;
                 response.Message = "Creation Successful";

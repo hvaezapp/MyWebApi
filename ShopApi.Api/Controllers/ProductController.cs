@@ -1,17 +1,13 @@
-﻿using ShopApi.Application.DTOs.Category;
-using ShopApi.Application.Features.Category.Requests.Queries;
-using ShopApi.Application.Features.Category.Requests.Commands;
-
-using ShopApi.Application.Responses;
+﻿using Azure;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ShopApi.Application.DTOs.Filter;
-using ShopApi.Application.Features.Product.Requests.Queries;
-using ShopApi.Application.Features.Product.Requests.Commands;
+using ShopApi.Application.DTOs.Category;
 using ShopApi.Application.DTOs.Product;
+using ShopApi.Application.Features.Product.Requests.Commands;
+using ShopApi.Application.Features.Product.Requests.Queries;
+using ShopApi.Application.Responses;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ShopApi.Api.Controllers
 {
@@ -31,10 +27,10 @@ namespace ShopApi.Api.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-     
-        public async Task<ActionResult<List<CategoryDto>>> Get(string filterByName = "" , int pageNom = 1)
+
+        public async Task<ActionResult<List<CategoryDto>>> GetAll(int pageNom = 1)
         {
-            var products = await _mediator.Send(new GetProductListRequest() {  FilterByName = filterByName , PageNom = pageNom });
+            var products = await _mediator.Send(new GetProductListRequest() { PageNom = pageNom });
             return Ok(products);
         }
 
@@ -53,10 +49,10 @@ namespace ShopApi.Api.Controllers
 
         // POST api/<ProductController>
         [HttpPost]
-        [Authorize(Roles = "ADMINISTRATOR")]
+        //[Authorize(Roles = "ADMINISTRATOR")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateProductDto productDto)
         {
-            var command = new CreateProductCommand { CreateProductDto = productDto };
+            var command = new CreateProductCommand { CreateProductDto = productDto   };
             var response = await _mediator.Send(command);
             return Ok(response);
         }
@@ -64,13 +60,13 @@ namespace ShopApi.Api.Controllers
 
 
         // PUT api/<ProductController>/2
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult> Put(int id, [FromBody] UpdateProductDto productDto)
+        [HttpPut]
+        //[Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<BaseCommandResponse>> Put([FromBody] UpdateProductDto productDto)
         {
             var command = new UpdateProductCommand { UpdateProductDto = productDto };
-            await _mediator.Send(command);
-            return NoContent();
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
 
 

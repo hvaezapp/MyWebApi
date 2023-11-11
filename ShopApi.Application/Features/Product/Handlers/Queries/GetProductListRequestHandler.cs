@@ -39,27 +39,24 @@ namespace ShopApi.Application.Features.Product.Handlers.Queries
             // paging
             int skip = (request.PageNom - 1) * 10;
 
-            List<Domain.Entity.Product> products = new();
-
-            if (_cache.TryGetValue(productListCacheKey, out List<Domain.Entity.Product> cashedProducts))
+          
+            if (_cache.TryGetValue(productListCacheKey, out List<Domain.Entity.Product> products))
             {
-                //products = cashedProducts.Skip(skip).Take(DefaultConst.TakeCount).ToList();
-
-                products = cashedProducts;
+                
             }
             else
             {
               
-                products = await _productRepository.GetProducts(request.FilterByName, skip, DefaultConst.TakeCount);
+                products = await _productRepository.GetProducts(skip, DefaultConst.TakeCount);
 
-                var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        .SetSlidingExpiration(TimeSpan.FromSeconds(60))
-                        .SetAbsoluteExpiration(TimeSpan.FromSeconds(3600))
-                        .SetPriority(CacheItemPriority.Normal)
-                        .SetSize(1024);
+                //var cacheEntryOptions = new MemoryCacheEntryOptions()
+                //        .SetSlidingExpiration(TimeSpan.FromSeconds(60))
+                //        .SetAbsoluteExpiration(TimeSpan.FromSeconds(3600))
+                //        .SetPriority(CacheItemPriority.Normal)
+                //        .SetSize(1024);
 
 
-                _cache.Set(productListCacheKey, products, cacheEntryOptions);
+                _cache.Set(productListCacheKey, products , TimeSpan.FromSeconds(60));
             }
 
 

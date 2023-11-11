@@ -43,26 +43,18 @@ namespace ShopApi.Application.Features.Category.Handlers.Queries
 
 
 
-            List<Domain.Entity.Category> categories = new();
-
-            if (_cache.TryGetValue(categoryListCacheKey, out List<Domain.Entity.Category> cashedCategories))
+            if (_cache.TryGetValue(categoryListCacheKey, out List<Domain.Entity.Category> categories))
             {
                 //categories = cashedCategories.Skip(skip).Take(DefaultConst.TakeCount).ToList();
-                categories = cashedCategories;
+                //categories = cashedCategories;
             }
             else
             {
 
-                categories = await _categoryRepository.GetCategories(request.FilterByName, skip, DefaultConst.TakeCount);
-
-                var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        .SetSlidingExpiration(TimeSpan.FromSeconds(60))
-                        .SetAbsoluteExpiration(TimeSpan.FromSeconds(3600))
-                        .SetPriority(CacheItemPriority.Normal)
-                        .SetSize(1024);
+                categories = await _categoryRepository.GetCategories(skip, DefaultConst.TakeCount);
 
 
-                _cache.Set(categoryListCacheKey, categories, cacheEntryOptions);
+                _cache.Set(categoryListCacheKey, categories , TimeSpan.FromSeconds(60));
             }
 
 

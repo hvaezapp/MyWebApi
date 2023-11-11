@@ -6,11 +6,12 @@ using ShopApi.Application.DTOs.Product.Validators;
 using ShopApi.Application.Exceptions;
 using ShopApi.Application.Features.Category.Requests.Commands;
 using ShopApi.Application.Features.Product.Requests.Commands;
+using ShopApi.Application.Responses;
 
 namespace ShopApi.Application.Features.Product.Handlers.Commands
 {
     public class UpdateProductCommandHandler
-        : IRequestHandler<UpdateProductCommand, Unit>
+        : IRequestHandler<UpdateProductCommand, BaseCommandResponse>
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
@@ -22,21 +23,36 @@ namespace ShopApi.Application.Features.Product.Handlers.Commands
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
 
+            var response = new BaseCommandResponse();
             var validator = new UpdateProductValidator();
             var validationResult = await validator.ValidateAsync(request.UpdateProductDto);
 
             if (validationResult.IsValid == false)
-                throw new ValidationException(validationResult);
+            {
+                response.Success = false;
+                response.Message = "Update Failed";
+                response.Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+            }
+            else
+            {
+                var product = await _productRepository.Get(request.UpdateProductDto.Id);
 
-            var category = await _productRepository.Get(request.UpdateProductDto.Id);
-            //_mapper.Map(request.UpdateCategoryDto, category);
-            await _productRepository.Update(category);
+                product.Name = request.UpdateProductDto.Name;
+                product.CategoryId = request.UpdateProductDto.CategoryId;
+
+                await _productRepository.Update(product);
+                await _productRepository.SaveChanges();
 
 
-            return Unit.Value;
+                response.Success = true;
+                response.Message = "Update Successful";
+                response.Id = product.Id;
+            }
+
+            return response;
         }
     }
 }

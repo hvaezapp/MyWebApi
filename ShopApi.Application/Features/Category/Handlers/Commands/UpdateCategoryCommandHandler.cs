@@ -4,12 +4,12 @@ using ShopApi.Application.Contracts.Persistence;
 using ShopApi.Application.DTOs.Category.Validators;
 using ShopApi.Application.Exceptions;
 using ShopApi.Application.Features.Category.Requests.Commands;
-
+using ShopApi.Application.Responses;
 
 namespace ShopApi.Application.Features.Category.Handlers.Commands
 {
     public class UpdateCategoryCommandHandler
-        : IRequestHandler<UpdateCategoryCommand, Unit>
+        : IRequestHandler<UpdateCategoryCommand, BaseCommandResponse>
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
@@ -21,21 +21,37 @@ namespace ShopApi.Application.Features.Category.Handlers.Commands
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
+            var response = new BaseCommandResponse();
 
             var validator = new UpdateCategoryValidator();
             var validationResult = await validator.ValidateAsync(request.UpdateCategoryDto);
 
             if (validationResult.IsValid == false)
-                throw new ValidationException(validationResult);
+            {
+                response.Success = false;
+                response.Message = "Update Failed";
+                response.Errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+            }
+            else
+            {
+                var category = await _categoryRepository.Get(request.UpdateCategoryDto.Id);
 
-            var category = await _categoryRepository.Get(request.UpdateCategoryDto.Id);
-            //_mapper.Map(request.UpdateCategoryDto, category);
-            await _categoryRepository.Update(category);
+                category.Name = request.UpdateCategoryDto.Name;
+
+                await _categoryRepository.Update(category);
+                await _categoryRepository.SaveChanges();
 
 
-            return Unit.Value;
+                response.Success = true;
+                response.Message = "Update Successful";
+                response.Id = category.Id;
+            }
+
+               
+
+            return response;
         }
     }
 }

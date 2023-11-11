@@ -10,5 +10,7 @@ namespace ShopApi.Application.DTOs.Category
     public class UpdateCategoryDto  : BaseDto
     {
         public string Name { get; set; }
+
+    
     }
 }

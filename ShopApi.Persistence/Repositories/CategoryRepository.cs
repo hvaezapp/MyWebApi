@@ -19,31 +19,10 @@ namespace ShopApi.Persistence.Repositories
 
 
 
-        public async Task<List<Category>> GetCategories(string filterByName = "", int skip = 0, int take  = 10)
+        public async Task<List<Category>> GetCategories(int skip = 0, int take  = 10)
         {
-            List<Category> categories = new();
-
-
-            if (string.IsNullOrEmpty(filterByName))
-            {
-                categories = await _dbContext.Category
-                                        .Where(a => a.Name.Contains(filterByName))
-                                        .Skip(skip).Take(take).ToListAsync();
-            }
-            else
-            {
-                categories = await _dbContext.Category
-                                   .Skip(skip).Take(take).ToListAsync();
-            }
-
-
-            //return            await _dbContext.Category
-            //                        .Where(a => a.Name.Contains(filterByName))
-            //                        .Skip(skip).Take(take).ToListAsync();
-
-
-
-            return categories;
+            return await _dbContext.Category
+                         .Skip(skip).Take(take).ToListAsync();
 
         }                                  
     }

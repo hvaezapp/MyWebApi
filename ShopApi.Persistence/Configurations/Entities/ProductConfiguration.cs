@@ -13,13 +13,13 @@ namespace ShopApi.Persistence.Configurations.Entities
                 {
                     Id = 1,
                     Name = "Nokia 1100",
-                    FkCategoryId  = 1,
+                    CategoryId  = 1,
                 },
                  new Product
                  {
                      Id = 2,
                      Name = "BMW A",
-                     FkCategoryId = 2
+                     CategoryId = 2
                  }
              );
         }

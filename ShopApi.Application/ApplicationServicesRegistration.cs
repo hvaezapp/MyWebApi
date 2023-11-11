@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -13,6 +14,10 @@ namespace ShopApi.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddMemoryCache();
+
+
+         
+
         }
     }
 }

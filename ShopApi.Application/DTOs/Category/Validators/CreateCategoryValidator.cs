@@ -15,6 +15,7 @@ namespace ShopApi.Application.DTOs.Category.Validators
               .NotNull()
               .MaximumLength(50).WithMessage("{PropertyName} must not exceed 50");
 
+
         }
     }
 }

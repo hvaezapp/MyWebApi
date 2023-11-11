@@ -6,12 +6,12 @@ namespace ShopApi.Domain.Entity
     public class Product : BaseDomainEntity
     {
         public string Name { get; set; }
-        public int FkCategoryId { get; set; }
+        public int CategoryId { get; set; }
 
 
 
 
-        [ForeignKey(nameof(FkCategoryId))]
+        [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; }
 
 

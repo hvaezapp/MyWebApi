@@ -39,12 +39,14 @@ namespace ShopApi.Application.Features.Product.Handlers.Commands
             else
             {
 
-                var category = _mapper.Map<Domain.Entity.Product>(request.CreateProductDto);
-                category = await _productRepository.Add(category);
+                var product = _mapper.Map<Domain.Entity.Product>(request.CreateProductDto);
+                product = await _productRepository.Add(product);
+                await _productRepository.SaveChanges();
+
 
                 response.Success = true;
                 response.Message = "Creation Successful";
-                response.Id = category.Id;
+                response.Id = product.Id;
             }
 
             return response;
